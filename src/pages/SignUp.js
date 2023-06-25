@@ -1,12 +1,12 @@
 import classes from "./SignUp.module.css";
 import { useState, useRef } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../store/auth";
 
 const SignUp = () => {
   //const dispatch = useDispatch();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
@@ -61,7 +61,7 @@ const SignUp = () => {
         // dispatch(authActions.token(data.idToken));
 
         localStorage.setItem("token", data.idToken);
-        //navigate("/dummy");
+        navigate("/dummy");
         console.log("User has successfully signed up");
       })
       .catch((err) => {
