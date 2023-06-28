@@ -31,12 +31,12 @@
 .emailbody__middle {
   display: flex;
   align-items: center;
-  flex: 90%;
+  flex: 100%;
 }
 
 .emailbody__middle .emailbody__middle__msg {
   display: flex;
-  width: 90%;
+  width: 100%;
 }
 
 .emailbody .emailbody__middle p {
@@ -45,11 +45,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0px 20px;
-  max-width: 700px;
+  max-width: 1000px;
 }
 
 .emailbody__right {
   display: flex;
   align-items: center;
   flex: 10%;
+}
+
+.preview {
+  padding: 1rem;
+  margin-top: 1rem;
 }

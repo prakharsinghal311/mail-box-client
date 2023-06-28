@@ -1,6 +1,7 @@
 import classes from "./SignUp.module.css";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../store/auth";
 
@@ -11,6 +12,8 @@ const SignUp = () => {
   const passwordInputRef = useRef();
 
   const [isLogin, setIsLogin] = useState(true);
+  // const [inbox, setInbox] = useState([]);
+  // const [sent, setSent] = useState([]);
 
   // const forgotPasswordHandler = () => {
   //   //navigate("/forgotPassword");
@@ -24,6 +27,25 @@ const SignUp = () => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    // const newemailid = enteredEmail.replace("@", "");
+
+    // const useremailid = newemailid.replace(".", "");
+
+    // if (!isLogin) {
+    //   axios
+    //     .post(
+    //       `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/${useremailid}.json`,
+    //       {
+    //         inbox,
+    //         sent,
+    //       }
+    //     )
+    //     .then((response) => {})
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
 
     let url;
     if (isLogin) {

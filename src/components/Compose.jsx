@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, ContentState } from "draft-js";
+import { EditorState } from "draft-js";
 import "../css/compose.css";
 import axios from "axios";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HeightIcon from "@mui/icons-material/Height";
 import CloseIcon from "@mui/icons-material/Close";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
 import { closeSendMessage } from "../features/mailSlice";
+import { convertToHTML } from "draft-convert";
 
 function Compose() {
   const dispatch = useDispatch();
   const [recipent, setRecipent] = useState();
   const [subject, setSubject] = useState();
   const [message, setMessage] = useState();
-  // const [editorState, setEditorState] = useState(() =>
-  //   EditorState.createEmpty()
-  // );
+  const [sender, setSender] = useState();
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   // const handleSend = (e) => {
   //   e.preventDefault();
@@ -30,11 +29,28 @@ function Compose() {
   //   // Perform actions with the contentPlainText
   // };
 
-  const sender = localStorage.getItem("email");
+  const sender1 = localStorage.getItem("email");
 
-  const senderId = sender.replace("@", "");
+  const senderId = sender1.replace("@", "");
 
   const senderEmailId = senderId.replace(".", "");
+
+  useEffect(() => {
+    setSender(localStorage.getItem("email"));
+  }, [sender]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${senderEmailId}.json`
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   const recipentChangeHandler = (e) => {
     setRecipent(e.target.value);
@@ -45,17 +61,19 @@ function Compose() {
   };
 
   const messageChangeHandler = (e) => {
-    setMessage(e.target.value);
+    setMessage(convertToHTML(editorState.getCurrentContent()));
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     const mailData = {
-      recipent,
+      sender,
       subject,
       message,
     };
+
+    console.log(mailData);
 
     const recipentId = recipent.replace("@", "");
 
@@ -111,11 +129,14 @@ function Compose() {
               onChange={subjectChangeHandler}
             />
 
-            {/* <Editor
-            editorState={editorState}
-            onEditorStateChange={setEditorState}
-          /> */}
-            <textarea rows="20" onChange={messageChangeHandler} />
+            <Editor
+              editorState={editorState}
+              onEditorStateChange={setEditorState}
+              wrapperClassName="wrapper-class"
+              editorClassName="editor-class"
+              toolbarClassName="toolbar-class"
+              onChange={messageChangeHandler}
+            />
           </div>
         </div>
 
