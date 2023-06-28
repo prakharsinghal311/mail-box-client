@@ -1,0 +1,62 @@
+.header {
+  display: grid;
+  grid-template-columns: auto 200px;
+  height: 50px;
+  align-items: center;
+  border-bottom: 1px solid whitesmoke;
+  padding: 10px;
+}
+
+.header__middle {
+  display: flex;
+  flex: 0.7;
+}
+
+.search_mail {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  flex: 0.7;
+}
+
+.header__middle input {
+  border: 0;
+  background: transparent;
+  outline: 0;
+  flex: 1;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
+.box {
+  border-radius: 20px;
+}
+
+.dummyScreen1 button {
+  font: inherit;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 1px solid #40005d;
+  background-color: #40005d;
+  color: white;
+  border-radius: 12px;
+  margin-right: 1rem;
+  float: right;
+}
+
+.dummyScreen2 button {
+  font: inherit;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 1px solid #40005d;
+  background-color: #40005d;
+  color: white;
+  border-radius: 12px;
+  margin-right: 1rem;
+  float: center;
+}

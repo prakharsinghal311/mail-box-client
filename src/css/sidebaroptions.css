@@ -1,0 +1,23 @@
+.sidebarOptions {
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+
+.sidebarOptions p {
+  opacity: 1;
+  color: rgb(94, 94, 94);
+  font-size: 12px;
+  opacity: 0;
+}
+
+.sidebarOptions--active {
+  background-color: blueviolet;
+}
+
+.sidebarOptions--active h4,
+.sidebarOptions--active p {
+  color: white;
+  font-weight: bold;
+  opacity: 1 !important;
+}

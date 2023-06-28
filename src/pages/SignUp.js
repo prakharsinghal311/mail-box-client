@@ -12,9 +12,9 @@ const SignUp = () => {
 
   const [isLogin, setIsLogin] = useState(true);
 
-  const forgotPasswordHandler = () => {
-    //navigate("/forgotPassword");
-  };
+  // const forgotPasswordHandler = () => {
+  //   //navigate("/forgotPassword");
+  // };
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -61,7 +61,7 @@ const SignUp = () => {
         // dispatch(authActions.token(data.idToken));
 
         localStorage.setItem("token", data.idToken);
-        navigate("/dummy");
+        navigate("/login");
         console.log("User has successfully signed up");
       })
       .catch((err) => {
@@ -87,13 +87,13 @@ const SignUp = () => {
           />
         </div>
         <div className={classes.actions}>
-          <button
+          {/* <button
             type="button"
             className={classes.toggle}
             onClick={forgotPasswordHandler}
           >
             {"forgot password"}
-          </button>
+          </button> */}
           <button>{isLogin ? "Login" : "create Account"}</button>
           <button
             type="button"
