@@ -40,7 +40,6 @@ export const mailSlice = createSlice({
     },
     changeSentMailActiveState(state, action) {
       state.sentMailActive = action.payload;
-      console.log(action.payload);
     },
     // setMailOpen(state) {
     //   state.mailOpen = true;

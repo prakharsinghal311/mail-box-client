@@ -16,21 +16,34 @@ function Emaillist() {
   const myEmailId = myId.replace(".", "");
 
   useEffect(() => {
-    axios
-      .get(
-        `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
-      )
-      .then((response) => {
-        setInboxData(response.data);
-        dispatch(updateInboxMailData(response.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const interval = setInterval(() => {
+      axios
+        .get(
+          `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
+        )
+        .then((response) => {
+          setInboxData(response.data);
+          dispatch(updateInboxMailData(response.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, [2000]);
+    return () => clearInterval(interval);
+    // axios
+    //   .get(
+    //     `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
+    //   )
+    //   .then((response) => {
+    //     setInboxData(response.data);
+    //     dispatch(updateInboxMailData(response.data));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, [myEmailId]);
 
   const mailData = useSelector((state) => state.mail.InboxMailData);
-  //console.log(mailData);
 
   return (
     <div className="emaillist">

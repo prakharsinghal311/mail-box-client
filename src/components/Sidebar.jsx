@@ -17,7 +17,6 @@ function Sidebar() {
   };
 
   const sentHandler = () => {
-    console.log("clicked");
     dispatch(changeSentMailActiveState(true));
   };
 

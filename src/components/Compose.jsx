@@ -37,6 +37,7 @@ function Compose() {
   }, [sender]);
 
   let inboxmaildata = useSelector((state) => state.mail.InboxMailData);
+  let sentmaildata = useSelector((state) => state.mail.SentMailData);
 
   const recipentChangeHandler = (e) => {
     setRecipent(e.target.value);
@@ -71,16 +72,16 @@ function Compose() {
         mailData
       )
       .then((response) => {
-        mailData = { ...mailData, id: response.data.name };
-        const maildata = { ...inboxmaildata };
-        maildata[mailData.id] = {
-          message: mailData.message,
-          mailDetail: mailData.mailDetail,
-          sender: mailData.sender,
-          subject: mailData.subject,
-          recipent: mailData.recipent,
-        };
-        dispatch(updateInboxMailData(maildata));
+        // mailData = { ...mailData, id: response.data.name };
+        // const maildata = { ...inboxmaildata };
+        // maildata[mailData.id] = {
+        //   message: mailData.message,
+        //   mailDetail: mailData.mailDetail,
+        //   sender: mailData.sender,
+        //   subject: mailData.subject,
+        //   recipent: mailData.recipent,
+        // };
+        // dispatch(updateInboxMailData(maildata));
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +94,7 @@ function Compose() {
       )
       .then((response) => {
         mailData = { ...mailData, id: response.data.name };
-        const maildata = { ...inboxmaildata };
+        const maildata = { ...sentmaildata };
         maildata[mailData.id] = {
           message: mailData.message,
           mailDetail: mailData.mailDetail,
