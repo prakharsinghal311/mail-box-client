@@ -8,6 +8,7 @@ export const mailSlice = createSlice({
     InboxMailData: {},
     SentMailData: {},
     particularmailId: 0,
+    sentMailActive: false,
     // mailOpen: false,
   },
 
@@ -37,6 +38,10 @@ export const mailSlice = createSlice({
     particularmailIdFunction(state, action) {
       state.particularmailId = action.payload;
     },
+    changeSentMailActiveState(state, action) {
+      state.sentMailActive = action.payload;
+      console.log(action.payload);
+    },
     // setMailOpen(state) {
     //   state.mailOpen = true;
     // },
@@ -52,6 +57,7 @@ export const {
   updateInboxMailData,
   updateSentMailData,
   particularmailIdFunction,
+  changeSentMailActiveState,
   // setMailOpen,
 } = mailSlice.actions;
 

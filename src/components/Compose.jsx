@@ -8,7 +8,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import HeightIcon from "@mui/icons-material/Height";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import { closeSendMessage, updateInboxMailData } from "../features/mailSlice";
+import {
+  closeSendMessage,
+  updateInboxMailData,
+  updateSentMailData,
+} from "../features/mailSlice";
 import { convertToHTML } from "draft-convert";
 import { addInboxData } from "../features/mailSlice";
 
@@ -22,14 +26,6 @@ function Compose() {
     EditorState.createEmpty()
   );
 
-  // const handleSend = (e) => {
-  //   e.preventDefault();
-  //   const contentState = editorState.getCurrentContent();
-  //   const contentPlainText = contentState.getPlainText();
-  //   console.log(contentPlainText);
-  //   // Perform actions with the contentPlainText
-  // };
-
   const sender1 = localStorage.getItem("email");
 
   const senderId = sender1.replace("@", "");
@@ -39,19 +35,6 @@ function Compose() {
   useEffect(() => {
     setSender(localStorage.getItem("email"));
   }, [sender]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${senderEmailId}.json`
-  //     )
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   let inboxmaildata = useSelector((state) => state.mail.InboxMailData);
 
@@ -75,9 +58,8 @@ function Compose() {
       subject,
       message,
       mailDetail: false,
+      recipent,
     };
-
-    //console.log(mailData);
 
     const recipentId = recipent.replace("@", "");
 
@@ -90,16 +72,13 @@ function Compose() {
       )
       .then((response) => {
         mailData = { ...mailData, id: response.data.name };
-        //console.log(mailData);
-        //console.log(response.data.name);
-        //dispatch(addInboxData(mailData));
-        //Object.assign(inboxmaildata, {mailData.id: {message: mailData.message}});
         const maildata = { ...inboxmaildata };
         maildata[mailData.id] = {
           message: mailData.message,
           mailDetail: mailData.mailDetail,
           sender: mailData.sender,
           subject: mailData.subject,
+          recipent: mailData.recipent,
         };
         dispatch(updateInboxMailData(maildata));
       })
@@ -112,7 +91,18 @@ function Compose() {
         `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${senderEmailId}.json`,
         mailData
       )
-      .then((response) => {})
+      .then((response) => {
+        mailData = { ...mailData, id: response.data.name };
+        const maildata = { ...inboxmaildata };
+        maildata[mailData.id] = {
+          message: mailData.message,
+          mailDetail: mailData.mailDetail,
+          sender: mailData.sender,
+          subject: mailData.subject,
+          recipent: mailData.recipent,
+        };
+        dispatch(updateSentMailData(maildata));
+      })
       .catch((error) => {
         console.log(error);
       });

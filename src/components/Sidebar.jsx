@@ -1,13 +1,25 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import "../css/sidebar.css";
 import Sidebaroptions from "./Sidebaroptions";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openSendMessage } from "../features/mailSlice";
+import {
+  changeSentMailActiveState,
+  openSendMessage,
+} from "../features/mailSlice";
 
 function Sidebar() {
   const dispatch = useDispatch();
+
+  const inboxHandler = () => {
+    dispatch(changeSentMailActiveState(false));
+  };
+
+  const sentHandler = () => {
+    console.log("clicked");
+    dispatch(changeSentMailActiveState(true));
+  };
 
   const mailData = useSelector((state) => state.mail.InboxMailData);
 
@@ -27,12 +39,13 @@ function Sidebar() {
       >
         Compose
       </Button>
-
-      <Button>
+      <Button onClick={inboxHandler}>
         <Sidebaroptions title="inbox" number={counter} isactive={true} />
       </Button>
 
-      <Sidebaroptions title="sent" number="50" />
+      <Button onClick={sentHandler}>
+        <Sidebaroptions title="sent" number="50" />
+      </Button>
     </div>
   );
 }
