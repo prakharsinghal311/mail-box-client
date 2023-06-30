@@ -15,6 +15,7 @@ import {
 } from "../features/mailSlice";
 import { convertToHTML } from "draft-convert";
 import { addInboxData } from "../features/mailSlice";
+import usePostInbox from "./customHooks/usePostInbox";
 
 function Compose() {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ function Compose() {
 
     const recipentEmailId = recipentId.replace(".", "");
 
+    //usePostInbox(recipentEmailId, mailData);
     axios
       .post(
         `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,

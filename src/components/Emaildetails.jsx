@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 import { mailDetailState } from "../features/mailSlice";
 import axios from "axios";
+import usePut from "./customHooks/usePut";
 
 function Emaildetails() {
   const navigate = useNavigate();
@@ -21,15 +22,19 @@ function Emaildetails() {
   const mailDataParticular = { ...mailData[randomId] };
   mailDataParticular.mailDetail = true;
 
-  axios
-    .put(
-      `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
-      mailDataParticular
-    )
-    .then((response) => {})
-    .catch((err) => {
-      console.log(err);
-    });
+  dispatch();
+
+  usePut(myEmailId, randomId, mailDataParticular);
+
+  // axios
+  //   .put(
+  //     `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
+  //     mailDataParticular
+  //   )
+  //   .then((response) => {})
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 
   function createMarkup(html) {
     return {

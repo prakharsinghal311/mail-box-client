@@ -4,6 +4,7 @@ import "../css/emaillist.css";
 import SentEmailBody from "./SentEmailBody";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSentMailData } from "../features/mailSlice";
+import useGetRequestSent from "./customHooks/useGetRequestSent";
 
 function SentMails() {
   const dispatch = useDispatch();
@@ -14,31 +15,33 @@ function SentMails() {
 
   const myEmailId = myId.replace(".", "");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      axios
-        .get(
-          `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
-        )
-        .then((response) => {
-          dispatch(updateSentMailData(response.data));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, [2000]);
-    return () => clearInterval(interval);
-    // axios
-    //   .get(
-    //     `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
-    //   )
-    //   .then((response) => {
-    //     dispatch(updateSentMailData(response.data));
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  }, [myEmailId]);
+  useGetRequestSent(myEmailId);
+
+  //   useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       axios
+  //         .get(
+  //           `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
+  //         )
+  //         .then((response) => {
+  //           dispatch(updateSentMailData(response.data));
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }, [2000]);
+  //     return () => clearInterval(interval);
+  //     // axios
+  //     //   .get(
+  //     //     `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
+  //     //   )
+  //     //   .then((response) => {
+  //     //     dispatch(updateSentMailData(response.data));
+  //     //   })
+  //     //   .catch((err) => {
+  //     //     console.log(err);
+  //     //   });
+  //   }, [myEmailId]);
 
   const mailData = useSelector((state) => state.mail.SentMailData);
 

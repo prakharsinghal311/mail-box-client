@@ -4,16 +4,18 @@ import "../css/emaillist.css";
 import Emailbody from "./Emailbody";
 import { useDispatch, useSelector } from "react-redux";
 import { updateInboxMailData } from "../features/mailSlice";
+import useGetRequestInbox from "./customHooks/useGetRequestInbox";
 
 function Emaillist() {
   const dispatch = useDispatch();
-  const [inboxData, setInboxData] = useState([]);
 
   const me = localStorage.getItem("email");
 
   const myId = me.replace("@", "");
 
   const myEmailId = myId.replace(".", "");
+
+  //useGetRequestInbox(myEmailId);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,7 +24,6 @@ function Emaillist() {
           `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
         )
         .then((response) => {
-          setInboxData(response.data);
           dispatch(updateInboxMailData(response.data));
         })
         .catch((err) => {
