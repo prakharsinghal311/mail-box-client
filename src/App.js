@@ -7,6 +7,7 @@ import ComposeMail from "./pages/ComposeMail";
 //import ForgotPassword from "./pages/ForgotPassword";
 //import AddingExpenses from "./pages/AddingExpenses";
 import "./App.css";
+import Emaillist from "./components/Emaillist";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<LoginScreen />} />
-        {/*<Route path="/composeMail" element={<ComposeMail />} />
+        {/*<Route path="/emaillist" element={<Emaillist />} />
+        <Route path="/composeMail" element={<ComposeMail />} />
         <Route path="/updateProfile" element={<UpdateProfile />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/addingExpenses" element={<AddingExpenses />} /> */}

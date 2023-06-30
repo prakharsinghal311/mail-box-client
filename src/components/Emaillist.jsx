@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/emaillist.css";
 import Emailbody from "./Emailbody";
+import { useDispatch } from "react-redux";
+import { updateInboxMailData } from "../features/mailSlice";
 
 function Emaillist() {
+  const dispatch = useDispatch();
   const [inboxData, setInboxData] = useState([]);
 
   const me = localStorage.getItem("email");
@@ -19,7 +22,7 @@ function Emaillist() {
       )
       .then((response) => {
         setInboxData(response.data);
-        console.log(response.data);
+        dispatch(updateInboxMailData(response.data));
       })
       .catch((err) => {
         console.log(err);
@@ -28,13 +31,15 @@ function Emaillist() {
 
   return (
     <div className="emaillist">
-      {Object.values(inboxData).map((mail) => {
+      {Object.entries(inboxData).map(([key, value]) => {
         return (
           <Emailbody
+            id={key}
             key={Math.random()}
-            name={mail.sender}
-            subject={mail.subject}
-            message={mail.message}
+            mailDetail={value.mailDetail}
+            name={value.sender}
+            subject={value.subject}
+            message={value.message}
           />
         );
       })}

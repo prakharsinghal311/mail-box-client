@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import { closeSendMessage } from "../features/mailSlice";
 import { convertToHTML } from "draft-convert";
+import { addInboxData } from "../features/mailSlice";
 
 function Compose() {
   const dispatch = useDispatch();
@@ -67,10 +68,11 @@ function Compose() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const mailData = {
+    let mailData = {
       sender,
       subject,
       message,
+      mailDetail: false,
     };
 
     console.log(mailData);
@@ -84,7 +86,12 @@ function Compose() {
         `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,
         mailData
       )
-      .then((response) => {})
+      .then((response) => {
+        mailData = { ...mailData, id: response.data.name };
+        console.log(mailData);
+        console.log(response.data.name);
+        dispatch(addInboxData(mailData));
+      })
       .catch((error) => {
         console.log(error);
       });
