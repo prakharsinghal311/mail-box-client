@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/emaillist.css";
 import Emailbody from "./Emailbody";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateInboxMailData } from "../features/mailSlice";
 
 function Emaillist() {
@@ -29,9 +29,12 @@ function Emaillist() {
       });
   }, [myEmailId]);
 
+  const mailData = useSelector((state) => state.mail.InboxMailData);
+  //console.log(mailData);
+
   return (
     <div className="emaillist">
-      {Object.entries(inboxData).map(([key, value]) => {
+      {Object.entries(mailData).map(([key, value]) => {
         return (
           <Emailbody
             id={key}

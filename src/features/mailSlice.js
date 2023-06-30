@@ -22,7 +22,10 @@ export const mailSlice = createSlice({
       state.mailDetail = !state.mailDetail;
     },
     addInboxData(state, action) {
-      Object.assign(state.InboxMailData, action.payload);
+      //console.log(action.payload);
+      //Object.assign(state.InboxMailData,{ (action.payload).id : {mailDetail: action.payload.mailDetail }});
+      // const inboxdata = { ...state.InboxMailData };
+      // console.log(inboxdata);
     },
     addSentData(state, action) {},
     updateInboxMailData(state, action) {

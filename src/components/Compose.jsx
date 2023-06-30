@@ -7,8 +7,8 @@ import axios from "axios";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HeightIcon from "@mui/icons-material/Height";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
-import { closeSendMessage } from "../features/mailSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSendMessage, updateInboxMailData } from "../features/mailSlice";
 import { convertToHTML } from "draft-convert";
 import { addInboxData } from "../features/mailSlice";
 
@@ -53,6 +53,8 @@ function Compose() {
   //     });
   // }, []);
 
+  let inboxmaildata = useSelector((state) => state.mail.InboxMailData);
+
   const recipentChangeHandler = (e) => {
     setRecipent(e.target.value);
   };
@@ -75,7 +77,7 @@ function Compose() {
       mailDetail: false,
     };
 
-    console.log(mailData);
+    //console.log(mailData);
 
     const recipentId = recipent.replace("@", "");
 
@@ -88,9 +90,18 @@ function Compose() {
       )
       .then((response) => {
         mailData = { ...mailData, id: response.data.name };
-        console.log(mailData);
-        console.log(response.data.name);
-        dispatch(addInboxData(mailData));
+        //console.log(mailData);
+        //console.log(response.data.name);
+        //dispatch(addInboxData(mailData));
+        //Object.assign(inboxmaildata, {mailData.id: {message: mailData.message}});
+        const maildata = { ...inboxmaildata };
+        maildata[mailData.id] = {
+          message: mailData.message,
+          mailDetail: mailData.mailDetail,
+          sender: mailData.sender,
+          subject: mailData.subject,
+        };
+        dispatch(updateInboxMailData(maildata));
       })
       .catch((error) => {
         console.log(error);
