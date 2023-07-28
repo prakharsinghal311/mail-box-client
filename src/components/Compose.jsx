@@ -15,7 +15,6 @@ import {
 } from "../features/mailSlice";
 import { convertToHTML } from "draft-convert";
 import { addInboxData } from "../features/mailSlice";
-import usePostInbox from "./customHooks/usePostInbox";
 
 function Compose() {
   const dispatch = useDispatch();
@@ -70,7 +69,7 @@ function Compose() {
     //usePostInbox(recipentEmailId, mailData);
     axios
       .post(
-        `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,
+        `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,
         mailData
       )
       .then((response) => {
@@ -91,7 +90,7 @@ function Compose() {
 
     axios
       .post(
-        `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailSent${senderEmailId}.json`,
+        `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailSent${senderEmailId}.json`,
         mailData
       )
       .then((response) => {

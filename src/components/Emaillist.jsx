@@ -4,7 +4,7 @@ import "../css/emaillist.css";
 import Emailbody from "./Emailbody";
 import { useDispatch, useSelector } from "react-redux";
 import { updateInboxMailData } from "../features/mailSlice";
-import useGetRequestInbox from "./customHooks/useGetRequestInbox";
+//import useGetRequestInbox from "./customHooks/useGetRequestInbox";
 
 function Emaillist() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function Emaillist() {
     const interval = setInterval(() => {
       axios
         .get(
-          `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
+          `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
         )
         .then((response) => {
           dispatch(updateInboxMailData(response.data));

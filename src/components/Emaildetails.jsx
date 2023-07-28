@@ -22,19 +22,19 @@ function Emaildetails() {
   const mailDataParticular = { ...mailData[randomId] };
   mailDataParticular.mailDetail = true;
 
+  axios
+    .put(
+      `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
+      mailDataParticular
+    )
+    .then((response) => {})
+    .catch((err) => {
+      console.log(err);
+    });
+
   dispatch();
 
-  usePut(myEmailId, randomId, mailDataParticular);
-
-  // axios
-  //   .put(
-  //     `https://mail-box-client-1dbc9-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
-  //     mailDataParticular
-  //   )
-  //   .then((response) => {})
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+  //usePut(myEmailId, randomId, mailDataParticular);
 
   function createMarkup(html) {
     return {
