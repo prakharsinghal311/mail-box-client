@@ -32,7 +32,7 @@ function Emaildetails() {
       console.log(err);
     });
 
-  dispatch();
+  //dispatch();
 
   //usePut(myEmailId, randomId, mailDataParticular);
 
