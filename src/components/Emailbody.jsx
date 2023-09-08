@@ -33,7 +33,7 @@ function Emailbody({ id, mailDetail, name, subject, message }) {
 
     axios
       .delete(
-        `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${id}.json`
+        `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${id}.json`
       )
       .then((response) => {})
       .catch((err) => {

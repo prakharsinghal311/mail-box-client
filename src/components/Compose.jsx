@@ -69,7 +69,7 @@ function Compose() {
     //usePostInbox(recipentEmailId, mailData);
     axios
       .post(
-        `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,
+        `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailInbox${recipentEmailId}.json`,
         mailData
       )
       .then((response) => {
@@ -90,7 +90,7 @@ function Compose() {
 
     axios
       .post(
-        `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailSent${senderEmailId}.json`,
+        `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailSent${senderEmailId}.json`,
         mailData
       )
       .then((response) => {

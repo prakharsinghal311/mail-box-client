@@ -12,7 +12,7 @@ import Emaillist from "./components/Emaillist";
 function App() {
   return (
     <BrowserRouter>
-      <Layout />
+      {/* <Layout /> */}
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<LoginScreen />} />

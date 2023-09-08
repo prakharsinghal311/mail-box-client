@@ -21,10 +21,10 @@ function Emaillist() {
     const interval = setInterval(() => {
       axios
         .get(
-          `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
+          `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailInbox${myEmailId}.json`
         )
         .then((response) => {
-          dispatch(updateInboxMailData(response.data));
+          dispatch(updateInboxMailData(response.data || {}));
         })
         .catch((err) => {
           console.log(err);

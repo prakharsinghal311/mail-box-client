@@ -50,10 +50,10 @@ const SignUp = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDRRF_rqpfSWi-SRtpVS1vckaL0_htZ8Pc";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCiZzYOcAkHlNidzwWDOX27hKkEwgQmytQ";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDRRF_rqpfSWi-SRtpVS1vckaL0_htZ8Pc";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCiZzYOcAkHlNidzwWDOX27hKkEwgQmytQ";
     }
 
     fetch(url, {

@@ -21,7 +21,7 @@ function SentMails() {
     const interval = setInterval(() => {
       axios
         .get(
-          `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
+          `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailSent${myEmailId}.json`
         )
         .then((response) => {
           dispatch(updateSentMailData(response.data));

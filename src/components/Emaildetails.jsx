@@ -24,7 +24,7 @@ function Emaildetails() {
 
   axios
     .put(
-      `https://mail-box-client-88072-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
+      `https://mailboxclient30-8-23-default-rtdb.firebaseio.com/emailInbox${myEmailId}/${randomId}.json`,
       mailDataParticular
     )
     .then((response) => {})
